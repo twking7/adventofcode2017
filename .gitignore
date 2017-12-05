@@ -1,0 +1,3 @@
+.aoc_id
+/target/
+**/*.rs.bk
