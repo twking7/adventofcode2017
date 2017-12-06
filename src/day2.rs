@@ -1,5 +1,5 @@
 fn part1(s: &str) -> usize {
-    s.split("\n").map(|line| {
+    s.split('\n').map(|line| {
         let mut nums = line.split_whitespace()
             .map(|n| n.parse().unwrap())
             .collect::<Vec<usize>>();
@@ -9,7 +9,7 @@ fn part1(s: &str) -> usize {
 }
 
 fn part2(s: &str) -> usize {
-    s.split("\n").fold(Vec::new(), |mut v, line| {
+    s.split('\n').fold(Vec::new(), |mut v, line| {
         let mut nums = line.split_whitespace()
             .map(|n| n.parse().unwrap())
             .collect::<Vec<usize>>();

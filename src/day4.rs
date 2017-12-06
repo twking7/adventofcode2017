@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use std::iter::FromIterator;
 
 fn part1(s: &str) -> usize {
-    s.split("\n")
+    s.split('\n')
         .filter(|phrase| {
             let words = phrase.split_whitespace().collect::<Vec<&str>>();
             let set: HashSet<&&str> = HashSet::from_iter(words.iter());
@@ -13,7 +13,7 @@ fn part1(s: &str) -> usize {
 }
 
 fn part2(s: &str) -> usize {
-    s.split("\n")
+    s.split('\n')
         .filter(|phrase| {
             let words = phrase
                 .split_whitespace()
