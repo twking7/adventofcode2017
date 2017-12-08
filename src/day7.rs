@@ -74,7 +74,7 @@ fn build_tree(root_line: &Line, line_map: &HashMap<String, Line>) -> Node {
 }
 
 fn calc_new_weight(node: &Node) -> usize {
-    let mut children: Vec<(usize, &Node)> = node.children.iter().map(|c| total_weight(c)).collect();
+    let mut children: Vec<(usize, &Node)> = node.children.iter().map(|c| (total_weight(c), c)).collect();
     children.sort_by(|a, b| a.0.cmp(&b.0));
     let heaviest = children.last().unwrap();
     let lightest = children.first().unwrap();
