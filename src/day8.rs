@@ -13,7 +13,7 @@ fn part1(input: &str) -> isize {
         };
 
         if if_result {
-            let var = registers.entry(expression[0]).or_insert(0).clone();
+            let var = *registers.entry(expression[0]).or_insert(0);
             let val: isize = expression[2].parse().unwrap();
 
             match expression[1] {
@@ -41,7 +41,7 @@ fn part2(input: &str) -> isize {
         };
 
         if if_result {
-            let var = registers.entry(expression[0]).or_insert(0).clone();
+            let var = *registers.entry(expression[0]).or_insert(0);
             let val: isize = expression[2].parse().unwrap();
 
             match expression[1] {

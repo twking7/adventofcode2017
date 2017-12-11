@@ -52,11 +52,11 @@ fn part2(input: &str) -> usize {
     let diff: Vec<_> = all_names.difference(&child_names).collect();
     let names: Vec<String> = diff.iter().map(|n| n.to_string()).collect();
     let root_name = names.first().unwrap();
-    let root_line = line_map.get(root_name).unwrap();
+    let root_line = &line_map[root_name];
 
-    let root_node = build_tree(&root_line, &line_map);
+    let root_node = build_tree(root_line, &line_map);
     match find_imbalanced(&root_node) {
-        Some(n) => calc_new_weight(&n),
+        Some(n) => calc_new_weight(n),
         None => 0
     }
 }
@@ -84,15 +84,15 @@ fn calc_new_weight(node: &Node) -> usize {
 }
 
 fn find_imbalanced(root: &Node) -> Option<&Node> {
-    if root.children.len() == 0 {
+    if root.children.is_empty() {
         return None
     }
 
     if !is_balanced(root) && root.children.iter().all(|c| is_balanced(c)) {
-        return Some(&root)
+        Some(root)
     } else {
-        for child in root.children.iter() {
-            if let Some(n) = find_imbalanced(&child) {
+        for child in &root.children {
+            if let Some(n) = find_imbalanced(child) {
                 return Some(n)
             }
         }
@@ -123,7 +123,7 @@ fn parse_line(line: &str, regex: &Regex) -> Line {
     let weight = caps[2].parse().unwrap();
 
     let children: Vec<String> = match pieces.get(1) {
-        Some(piece) => piece.trim().split(",").map(|s| s.trim().to_string()).collect(),
+        Some(piece) => piece.trim().split(',').map(|s| s.trim().to_string()).collect(),
         None => Vec::new(),
     };
 
