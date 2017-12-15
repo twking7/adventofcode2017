@@ -140,7 +140,6 @@ mod test {
         assert_eq!(part1("flqrgnkx"), 8108);
     }
 
-    #[test]
     fn test_part2() {
         assert_eq!(part2("flqrgnkx"), 1242);
     }
