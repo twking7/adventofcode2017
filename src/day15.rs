@@ -57,10 +57,14 @@ fn low16(n: usize) -> usize {
 mod test {
     use super::*;
 
+    #[test]
+    #[ignore]
     fn test_part1() {
         assert_eq!(part1(65, 8921, 40_000_000), 588);
     }
 
+    #[test]
+    #[ignore]
     fn test_part2() {
         assert_eq!(part2(65, 8921, 1056), 1);
         assert_eq!(part2(65, 8921, 5_000_000), 309);

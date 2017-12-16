@@ -136,10 +136,14 @@ fn str_to_bytes(s: &str) -> Vec<u8> {
 mod test {
     use super::*;
 
+    #[test]
+    #[ignore]
     fn test_part1() {
         assert_eq!(part1("flqrgnkx"), 8108);
     }
 
+    #[test]
+    #[ignore]
     fn test_part2() {
         assert_eq!(part2("flqrgnkx"), 1242);
     }
