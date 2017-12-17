@@ -47,12 +47,10 @@ fn part2(s: &str, moves: &str, cycles: usize) -> String {
     let len = v.len();
     let steps = moves.split(',').map(|m| Step::from(m)).collect::<Vec<Step>>();
     let mut memo: HashMap<Vec<String>, usize> = HashMap::new();
-    let mut cycle_len = 0;
 
     for i in 0..cycles {
         if memo.get(&v).is_some() { break }
 
-        cycle_len += 1;
         memo.insert(v.to_vec(), i);
 
         for step in &steps {
@@ -68,8 +66,8 @@ fn part2(s: &str, moves: &str, cycles: usize) -> String {
         }
     }
 
-    if cycle_len != 0 {
-        let final_idx = cycles % cycle_len;
+    if memo.len() < cycles {
+        let final_idx = cycles % memo.len();
         let (result, _) = memo.iter().find(|&(_, i)| *i == final_idx).unwrap();
         result.join("")
     } else {
