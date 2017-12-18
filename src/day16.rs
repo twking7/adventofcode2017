@@ -25,7 +25,7 @@ impl<'a> From<&'a str> for Step<'a> {
 fn part1(s: &str, moves: &str) -> String {
     let mut v: Vec<char> = s.chars().collect();
     let len = v.len();
-    let steps = moves.split(',').map(|m| Step::from(m)).collect::<Vec<Step>>();
+    let steps = moves.split(',').map(Step::from).collect::<Vec<Step>>();
 
     for step in steps {
         match step {
@@ -45,7 +45,7 @@ fn part1(s: &str, moves: &str) -> String {
 fn part2(s: &str, moves: &str, cycles: usize) -> String {
     let mut v: Vec<String> = s.chars().map(|c| c.to_string()).collect();
     let len = v.len();
-    let steps = moves.split(',').map(|m| Step::from(m)).collect::<Vec<Step>>();
+    let steps = moves.split(',').map(Step::from).collect::<Vec<Step>>();
     let mut memo: HashMap<Vec<String>, usize> = HashMap::new();
 
     for i in 0..cycles {
@@ -54,10 +54,10 @@ fn part2(s: &str, moves: &str, cycles: usize) -> String {
         memo.insert(v.to_vec(), i);
 
         for step in &steps {
-            match step {
-                &Step::Shift(n) => v.rotate(len - n),
-                &Step::Swap(a, b) => v.swap(a, b),
-                &Step::Partner(a, b) => {
+            match *step {
+                Step::Shift(n) => v.rotate(len - n),
+                Step::Swap(a, b) => v.swap(a, b),
+                Step::Partner(a, b) => {
                     let idx_a = v.iter().position(|c| c == a).unwrap();
                     let idx_b = v.iter().position(|c| c == b).unwrap();
                     v.swap(idx_a, idx_b)

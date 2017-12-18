@@ -14,7 +14,7 @@ fn part1(s: &str) -> usize {
         .map(|hash| hash.iter().map(|n| format!("{:b}", n)).collect())
         .collect::<Vec<String>>()
         .join("")
-        .matches("1")
+        .matches('1')
         .count()
 }
 
@@ -40,7 +40,7 @@ fn part2(s: &str) -> usize {
         for (j, bit) in bit_row.iter().enumerate() {
             if matrix[i][j] == 0 && *bit == 1 {
                 let mut visited = HashSet::new();
-                match linked_group(i, j, &bit_rows, &mut matrix, &mut visited) {
+                match linked_group(i, j, &bit_rows, &matrix, &mut visited) {
                     Some(group) => { matrix[i][j] = group; },
                     None => {
                         groups += 1;
@@ -54,7 +54,7 @@ fn part2(s: &str) -> usize {
     groups
 }
 
-fn linked_group(i: usize, j: usize, bits: &Vec<Vec<usize>>, matrix: &Vec<Vec<usize>>, visited: &mut HashSet<(usize, usize)>) -> Option<usize> {
+fn linked_group(i: usize, j: usize, bits: &[Vec<usize>], matrix: &[Vec<usize>], visited: &mut HashSet<(usize, usize)>) -> Option<usize> {
     if visited.contains(&(i, j)) {
         return None;
     }
@@ -69,25 +69,21 @@ fn linked_group(i: usize, j: usize, bits: &Vec<Vec<usize>>, matrix: &Vec<Vec<usi
         return Some(matrix[i][j]);
     }
 
-    let mut left = None;
-    if j > 0 {
-        left = linked_group(i, j - 1, bits, matrix, visited);
-    }
+    let left = if j > 0 {
+        linked_group(i, j - 1, bits, matrix, visited)
+    } else { None };
 
-    let mut up = None;
-    if i > 0 {
-        up = linked_group(i - 1, j, bits, matrix, visited);
-    }
+    let up = if i > 0 {
+        linked_group(i - 1, j, bits, matrix, visited)
+    } else { None };
 
-    let mut right = None;
-    if j < 127 {
-        right = linked_group(i, j + 1, bits, matrix, visited);
-    }
+    let right = if j < 127 {
+        linked_group(i, j + 1, bits, matrix, visited)
+    } else { None };
 
-    let mut down = None;
-    if i < 127 {
-        down = linked_group(i + 1, j, bits, matrix, visited);
-    }
+    let down = if i < 127 {
+        linked_group(i + 1, j, bits, matrix, visited)
+    } else { None };
 
     vec![left, up, right, down]
         .into_iter()

@@ -1,7 +1,7 @@
 fn part1(mut a: usize, mut b: usize, cycles: usize) -> usize {
-    let a_factor = 16807;
-    let b_factor = 48271;
-    let divisor = 2147483647;
+    let a_factor = 16_807;
+    let b_factor = 48_271;
+    let divisor = 2_147_483_647;
     let mut matches = 0;
 
     for _ in 0..cycles {
@@ -17,9 +17,9 @@ fn part1(mut a: usize, mut b: usize, cycles: usize) -> usize {
 }
 
 fn part2(mut a: usize, mut b: usize, cycles: usize) -> usize {
-    let a_factor = 16807;
-    let b_factor = 48271;
-    let divisor = 2147483647;
+    let a_factor = 16_807;
+    let b_factor = 48_271;
+    let divisor = 2_147_483_647;
     let mut valid_a = Vec::new();
     let mut valid_b = Vec::new();
     let mut matches = 0;
@@ -50,7 +50,7 @@ fn part2(mut a: usize, mut b: usize, cycles: usize) -> usize {
 }
 
 fn low16(n: usize) -> usize {
-    n & 0b1111111111111111
+    n & 0b1111_1111_1111_1111
 }
 
 #[cfg(test)]

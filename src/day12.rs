@@ -31,7 +31,7 @@ fn visit_nodes(curr: usize, map: &HashMap<usize, Vec<usize>>, mut visited: &mut 
     let child_ids = map.get(&curr).unwrap();
 
     for child_id in child_ids {
-        visit_nodes(*child_id, &map, &mut visited);
+        visit_nodes(*child_id, map, &mut visited);
     }
 }
 
