@@ -18,7 +18,7 @@ fn part1(maze: &str) -> String {
 
     loop {
         match matrix[pos.0][pos.1] {
-            '|' | '-'  => pos = step(&pos, &d),
+            '|' | '-' => pos = step(&pos, &d),
             '+' => {
                 d = turn(&pos, &d, &matrix);
                 pos = step(&pos, &d);
