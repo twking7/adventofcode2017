@@ -37,13 +37,13 @@ fn part1(s: &str) -> usize {
     let mut particles = str_to_particles(s);
 
     for _ in 0..100_000 {
-        for mut particle in particles.iter_mut() {
+        for mut particle in &mut particles {
             particle.step();
         }
     }
 
     particles.sort_by(|a, b| a.p.norm().cmp(&b.p.norm()));
-    particles.iter().nth(0).unwrap().name
+    particles[0].name
 }
 
 fn part2(s: &str) -> usize {
@@ -52,7 +52,7 @@ fn part2(s: &str) -> usize {
     for _ in 0..1_000 {
         remove_collisions(&mut particles);
 
-        for mut particle in particles.iter_mut() {
+        for mut particle in &mut particles {
             particle.step();
         }
     }
@@ -66,8 +66,8 @@ fn remove_collisions(particles: &mut Vec<Particle>) {
     for i in 0..particles.len() {
         for j in 0..particles.len() {
             if i != j && particles[i].p == particles[j].p {
-                removals.insert(particles[j].name.clone());
-                removals.insert(particles[i].name.clone());
+                removals.insert(particles[j].name);
+                removals.insert(particles[i].name);
             }
         }
     }
